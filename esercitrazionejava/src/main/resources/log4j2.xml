@@ -1,0 +1,19 @@
+<Configuration>
+    <Appenders>
+        <File name="Simple"
+              fileName="app/${date:yyyy-MM-dd}/logSimple.log">
+            <PatternLayout pattern="%d %p [%t] %m%n"/>
+        </File>
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout disableAnsi="false"  pattern="%highlight{%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n}{FATAL=magenta, ERROR=red, WARN=yellow, INFO=cyan, DEBUG=green, TRACE=blue}"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+      <Logger name="org.apache.xmlbeans" level="off"/>
+        <Logger name="org.apache.poi.openxml4j" level="off"/>
+        <Root level="all">
+            <AppenderRef ref="Simple"/>
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
