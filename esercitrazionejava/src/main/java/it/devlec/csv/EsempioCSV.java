@@ -25,13 +25,18 @@ public class EsempioCSV {
     public EsempioCSV() {
     }
     public void leggiCSV() {
+
+        // cerca esempio.csv e ne salva l'url in mieiAutoriCSVPath
         String mieiAutoriCSVPath = null;
         try {
             mieiAutoriCSVPath = Paths.get(ClassLoader.getSystemResource("esempio.csv")
                     .toURI()).toString();
+            logger.info("leggiCSV - Trovato file esempio.csv in: " + mieiAutoriCSVPath);
         } catch (URISyntaxException e) {
             logger.error("Errore nel trovare nel creare il file");
         }
+
+        // legge esempio.csv e ne stampa le tuple leggendo da un iterator ricavato con il parse di un Reader
         Reader in = null;
         try {
             in = new FileReader(mieiAutoriCSVPath);
@@ -50,13 +55,18 @@ public class EsempioCSV {
     }
     public void scriviCSV(){
         try {
+
+            // cerca esempio.csv e ne salva l'url in mieiAutoriCSVPath
             String mieiAutoriCSVPath = null;
             try {
                 mieiAutoriCSVPath = Paths.get(ClassLoader.getSystemResource("esempio.csv")
                         .toURI()).toString();
+                logger.info("scriviCSV - Trovato file esempio.csv in: " + mieiAutoriCSVPath);
             } catch (URISyntaxException e) {
                 logger.error("Errore nel trovare nel creare il file");
             }
+
+            // elinina mieiAutori.csv (se esiste) dalla cartella in cui si trova esempio.csv
             File parent = new File(mieiAutoriCSVPath).getParentFile();
             String csvFile = parent.getAbsolutePath() + File.separator + "mieiAutori.csv";
             File mioCSV = new File(csvFile);
@@ -64,10 +74,14 @@ public class EsempioCSV {
                 logger.debug("Elimino il vecchio CSV");
                 mioCSV.delete();
             }
+
+            // prova a creare il file mieiAutori.csv
             boolean fileCreato = mioCSV.createNewFile();
             if(fileCreato){
-                logger.debug("File CSV creato correttamente");
+                logger.debug("File CSV creato correttamente: " + csvFile);
             }
+
+            // stampa i record del CSV iterando per ogni entry della mappa e stampando key,value
             FileWriter out = new FileWriter(mieiAutoriCSVPath);
             try (CSVPrinter printer = new CSVPrinter(out, CSVFormat.DEFAULT)) {
                 MIEI_AUTORI.forEach((author, title) -> {
@@ -77,6 +91,7 @@ public class EsempioCSV {
                         logger.error("Si è verificato un errore nel scrivere i miei autori", e);                    }
                 });
             }
+
         } catch (IOException e) {
             logger.error("Si è verificato un errore", e);
         }
