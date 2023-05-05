@@ -10,6 +10,11 @@ public class EsempioLog {
 
     }
     public void stampaAltriLog(){
-        logger.info("Ciao da stampa altri log...");
+        logger.trace("Log4j 2 - test trace");
+        logger.debug("Log4j 2 - test debug");
+        logger.info("Log4j 2 - test info");
+        logger.warn("Log4j 2 - test warn");
+        logger.error("Log4j 2 - test error");
+        logger.fatal("Log4j 2 - test fatal");
     }
 }

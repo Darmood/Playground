@@ -8,24 +8,23 @@ import org.json.JSONObject;
 public class EsempioJSON {
     private static final Logger logger = LogManager.getLogger(EsempioJSON.class);
 
-    public void esempioJSONOggetto(){
+    public JSONObject JSONOggetto(){
         JSONObject jo = new JSONObject();
-        jo.put("nome", "Giovanni");
-        jo.put("eta", "22");
+        jo.put("nome", "Mario");
+        jo.put("cognome", "Rossi");
+        jo.put("eta", "72");
         jo.put("citta", "Lecce");
-        logger.info("JSON "+ jo);
+
+        return jo;
     }
-    public void esempioJSONArray(){
+    public JSONArray JSONArray(){
         JSONArray ja = new JSONArray();
         ja.put(Boolean.TRUE);
-        ja.put("Ciao a tutti");
+        ja.put("Secondo elem");
+        ja.put(JSONOggetto());
+        ja.put(JSONOggetto());
+        ja.put("Utimo elem");
 
-        JSONObject jo = new JSONObject();
-        jo.put("Nome", "Luca");
-        jo.put("eta", "67");
-        jo.put("citta", "Roma");
-
-        ja.put(jo);
-        logger.info("JSON "+ ja);
+        return ja;
     }
 }
